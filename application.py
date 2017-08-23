@@ -14,21 +14,10 @@ from utils import (
 MONITOR_PRICE = 0.23
 
 
-def notify(title, text):
-    os.system("""
-              osascript -e 'display notification "{}" with title "{}"'
-              """.format(text, title))
-
-
 def retrieve_price():
     url = 'https://www.bitstamp.net/api/v2/ticker/xrpeur/'
     response = requests.get(url)
     return float(response.json()['last'])
-
-
-def notify_user(current_price):
-    msg = 'Price: {}'.format(current_price)
-    notify('XRP-ALERT', msg)
 
 
 def send_email(price):
@@ -43,8 +32,7 @@ def send_email(price):
 if __name__ == '__main__':
     price = retrieve_price()
     if price > MONITOR_PRICE:
-        notify_user(price)
         send_email(price)
-        print('USER NOTIFIED')
+        print('EMAIL SENT')
     else:
         print('The current price {} is lower than the alert price {}'.format(price, MONITOR_PRICE))
