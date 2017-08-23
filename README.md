@@ -1,13 +1,23 @@
 # XRP MONITOR
 
-### Setup
+## Setup
+
+Install requirements:
 
 `pip install -r requirements/requirements.txt`
 
 ```
-export SMTP_SERVER='smtp.gmail.com'
-export SMTP_EMAIL='noreply@exmaple.com'
-export SMTP_EMAIL_RECEIVER='example@example.com'
-export SMTP_EMAIL_PORT='587'
-export SMTP_PASSWORD='password'
+export API_KEY='your api key'
 ```
+
+Configure a cron
+
+`crontab -e`
+
+Add the following line:
+
+`*/5 * * * * source [file with api_key] && python [path-to-project/application.py]`
+
+Install the Datadog Agent and configure it to send custom metrics
+
+Configure a Datadog Monitor with the alert price
